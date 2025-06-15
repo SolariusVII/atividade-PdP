@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Pedidos - Design Patterns Demo</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- BoxIcons para ícones -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="./css/styles.css">
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" defer></script>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="bx bx-restaurant"></i> Sistema de Pedidos
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#pedidos"><i class="bx bx-list-ul"></i> Pedidos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#relatorios"><i class="bx bx-file"></i> Relatórios</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#temas"><i class="bx bx-palette"></i> Temas</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <!-- Header -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h1 class="card-title">
+                            <i class="bx bx-cog"></i> Demonstração de Design Patterns
+                        </h1>
+                        <p class="card-text">
+                            Este sistema demonstra os padrões <strong>Factory Method</strong> e <strong>Abstract
+                                Factory</strong>
+                            aplicados em um sistema de gerenciamento de pedidos.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Seletor de Tema -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5><i class="bx bx-palette"></i> Abstract Factory - Seleção de Tema</h5>
+                    </div>
+                    <div class="card-body">
+                        <p>Selecione um tema para demonstrar o padrão Abstract Factory:</p>
+                        <div class="d-flex flex-wrap">
+                            <button class="btn btn-primary btn-tema" onclick="aplicarTema('light')">
+                                <i class="bx bx-sun"></i> Light Theme
+                            </button>
+                            <button class="btn btn-success btn-tema" onclick="aplicarTema('dark')">
+                                <i class="bx bx-moon"></i> Dark Theme
+                            </button>
+                            <button class="btn btn-dark btn-tema" onclick="aplicarTema('highcontrast')">
+                                <i class="bx bx-contrast"></i> High Contrast
+                            </button>
+                        </div>
+                        <div id="tema-info" class="mt-3"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lista de Pedidos -->
+        <div class="row mb-4" id="pedidos">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5><i class="bx bx-list-ul"></i> Lista de Pedidos</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped" id="tabela-pedidos">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Cliente</th>
+                                        <th>Item</th>
+                                        <th>Valor</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Dados carregados via JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <button class="btn btn-outline-primary" onclick="carregarPedidos()">
+                            <i class="bx bx-refresh"></i> Atualizar Lista
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Geração de Relatórios -->
+        <div class="row mb-4" id="relatorios">
+            <div class="col-12">
+                <div class="demo-section">
+                    <h5><i class="bx bx-file"></i> Factory Method - Geração de Relatórios</h5>
+                    <p>Demonstração do padrão Factory Method para gerar relatórios em diferentes formatos:</p>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-danger" onclick="gerarRelatorio('pdf')">
+                                    <i class="bx bx-file-blank"></i> Gerar Relatório PDF
+                                </button>
+                                <button class="btn btn-warning" onclick="gerarRelatorio('html')">
+                                    <i class="bx bx-code-alt"></i> Gerar Relatório HTML
+                                </button>
+                                <button class="btn btn-info" onclick="gerarRelatorio('json')">
+                                    <i class="bx bx-data"></i> Gerar Relatório JSON
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div id="relatorio-output" class="relatorio-output">
+                                Clique em um dos botões para gerar um relatório...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Demonstração Integrada -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="demo-section">
+                    <h5><i class="bx bx-cog"></i> Demonstração Integrada</h5>
+                    <p>Combine ambos os padrões: gere um relatório HTML com o tema selecionado aplicado.</p>
+
+                    <button class="btn btn-primary btn-lg" onclick="demonstracaoIntegrada()">
+                        <i class="bx bx-play-circle"></i> Executar Demonstração Integrada
+                    </button>
+
+                    <div id="demo-integrada" class="mt-3"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container text-center">
+            <p class="mb-0">
+                Sistema de Pedidos - Demonstração de Design Patterns |
+                <strong>Factory Method</strong> + <strong>Abstract Factory</strong>
+            </p>
+        </div>
+    </footer>
+
+</body>
+
+</html>

@@ -1,5 +1,8 @@
-%% filepath: c:\Users\Vinicius\Documents\GitHub\atividade-PdP\sistema-pedidos\docs\AbstractFactoryMethod.mmd
+# Abstract Factory Method  
+
+```mermaid
 classDiagram
+    
     class TemaFactory {
         <<abstract>>
         + criarBotao()
@@ -136,3 +139,4 @@ classDiagram
     TemaFactory --> Botao : cria
     TemaFactory --> Cor : cria
     TemaFactory --> Icone : cria
+```

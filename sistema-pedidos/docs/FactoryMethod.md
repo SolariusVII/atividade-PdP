@@ -1,4 +1,6 @@
-%% filepath: c:\Users\Vinicius\Documents\GitHub\atividade-PdP\sistema-pedidos\docs\FactoryMethod.mmd
+# Factory Method
+
+```mermaid
 classDiagram
     class Pedido {
         - int id
@@ -66,3 +68,4 @@ classDiagram
 
     Cliente --> RelatorioFactory : utiliza
     RelatorioFactory --> Relatorio : cria
+    ```

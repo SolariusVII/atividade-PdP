@@ -45,7 +45,7 @@ public class Main {
                 path = "/index.html";
             }
 
-            String filePath = "frontend" + path;
+            String filePath = "sistema-pedidos/frontend" + path;
             File file = new File(filePath);
 
             if (file.exists() && !file.isDirectory()) {

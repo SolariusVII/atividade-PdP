@@ -1,0 +1,68 @@
+%% filepath: c:\Users\Vinicius\Documents\GitHub\atividade-PdP\sistema-pedidos\docs\FactoryMethod.mmd
+classDiagram
+    class Pedido {
+        - int id
+        - String cliente
+        - String item
+        - double valor
+        - String status
+        + getId()
+        + getCliente()
+        + getItem()
+        + getValor()
+        + getStatus()
+    }
+
+    class Relatorio {
+        <<interface>>
+        + gerar(List<Pedido> pedidos)
+        + getTipo()
+    }
+
+    class HtmlRelatorio {
+        + gerar(List<Pedido> pedidos)
+        + getTipo()
+    }
+
+    class PdfRelatorio {
+        + gerar(List<Pedido> pedidos)
+        + getTipo()
+    }
+
+    class JsonRelatorio {
+        + gerar(List<Pedido> pedidos)
+        + getTipo()
+    }
+
+    Relatorio <|.. HtmlRelatorio
+    Relatorio <|.. PdfRelatorio
+    Relatorio <|.. JsonRelatorio
+
+    class RelatorioFactory {
+        <<abstract>>
+        + criarRelatorio()
+        + gerarRelatorio(List<Pedido> pedidos)
+    }
+
+    class HtmlRelatorioFactory {
+        + criarRelatorio()
+    }
+
+    class PdfRelatorioFactory {
+        + criarRelatorio()
+    }
+
+    class JsonRelatorioFactory {
+        + criarRelatorio()
+    }
+
+    RelatorioFactory <|-- HtmlRelatorioFactory
+    RelatorioFactory <|-- PdfRelatorioFactory
+    RelatorioFactory <|-- JsonRelatorioFactory
+
+    class Cliente {
+        + solicitarRelatorio(String tipoRelatorio)
+    }
+
+    Cliente --> RelatorioFactory : utiliza
+    RelatorioFactory --> Relatorio : cria
